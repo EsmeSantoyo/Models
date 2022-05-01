@@ -17,7 +17,7 @@ class UserView {
             } else if (typeof payload.username != "string" || payload.username == null){
                 response = new UserView("necesitan tener un valor valido")
             } else {
-                response = UserService.create(1, "carlogilmar", "Carlo")
+                response = UserService.create(payload.id, payload.username, payload.name)
             }
         }
         return response
