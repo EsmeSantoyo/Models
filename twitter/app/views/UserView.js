@@ -7,16 +7,16 @@ class UserView {
 
     static createUser(payload){
         var response;
+        const types = {id:"number", name:"string", username:"string"}
         if (payload === null){
             response = new UserView("payload no existe")
         } else {
-            if (typeof payload.id != "number" || payload.id == null){
-                response = new UserView("necesitan tener un valor valido")
-            } else if (typeof payload.name != "string" || payload.name == null){
-                response = new UserView("necesitan tener un valor valido")
-            } else if (typeof payload.username != "string" || payload.username == null){
-                response = new UserView("necesitan tener un valor valido")
-            } else {
+            for(let item in payload){
+                if (typeof payload[item] != types[item] || payload[item] == null){
+                    response = new UserView("necesitan tener un valor valido")
+                }   
+            }
+            if (!response){
                 response = UserService.create(payload.id, payload.username, payload.name)
             }
         }
